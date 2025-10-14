@@ -53,7 +53,7 @@ const CircularText = ({
       case "speedUp":
         controls.start({
           rotate: currentRotation + 360,
-          scale: 1,
+          scale: 1.1, // Légère augmentation pour l'effet biscuit
           transition: getTransition(spinDuration / 4, currentRotation),
         });
         break;
@@ -70,7 +70,7 @@ const CircularText = ({
       case "goBonkers":
         controls.start({
           rotate: currentRotation + 360,
-          scale: 0.8,
+          scale: 0.9,
           transition: getTransition(spinDuration / 20, currentRotation),
         });
         break;
@@ -96,6 +96,16 @@ const CircularText = ({
       onMouseEnter={handleHoverStart}
       onMouseLeave={handleHoverEnd}
     >
+      {/* Effet de texture biscuit */}
+      <div className="cookie-texture"></div>
+      
+      {/* Points de chocolat décoratifs */}
+      <div className="chocolate-chips">
+        {[...Array(8)].map((_, i) => (
+          <div key={i} className={`chocolate-chip chip-${i + 1}`}></div>
+        ))}
+      </div>
+
       {letters.map((letter, i) => {
         const rotation = (360 / letters.length) * i;
         const factor = Number((Math.PI / letters.length).toFixed(0));

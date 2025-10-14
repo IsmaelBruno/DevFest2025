@@ -1,51 +1,45 @@
 import "./Footer.scss";
-import { FaReact, FaNodeJs, FaFacebook, FaGithub, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
+import {
+  FaFacebook,
+  FaGithub,
+  FaLinkedin,
+  FaTwitter,
+  FaPhoneAlt,
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaArrowRight
+} from "react-icons/fa";
 import Marquee from "react-fast-marquee";
 import img1 from "../../../../assets/Images/Jpeg/EMIT.png";
-import img2 from "../../../../assets/Images//Jpeg/Akata.jpg";
-import img3 from "../../../../assets/Images//Jpeg/Computer.jpg";
-import img4 from "../../../../assets/Images//Jpeg/emitech.jpg";
-import img5 from "../../../../assets/Images//Jpeg/FiharySoft.jpg";
-import img6 from "../../../../assets/Images//Jpeg/relia.jpg";
+import img2 from "../../../../assets/Images/Jpeg/Akata.jpg";
+import img3 from "../../../../assets/Images/Jpeg/Computer.jpg";
+import img4 from "../../../../assets/Images/Jpeg/emitech.jpg";
+import img5 from "../../../../assets/Images/Jpeg/FiharySoft.jpg";
+import img6 from "../../../../assets/Images/Jpeg/relia.jpg";
 
 const Footer = () => {
   const partnerImages = [img1, img2, img3, img4, img5, img6];
+
+  const currentYear = new Date().getFullYear();
+
+  const quickLinks = [
+    { name: "Signaler un cas", url: "/signaler-cas" },
+    { name: "Assistant IA", url: "/quiz" },
+    { name: "Carte infographique", url: "/cartographie" },
+    { name: "À propos", url: "/a-propos" }
+  ];
+
+  const socialLinks = [
+    { icon: <FaFacebook />, url: "#", label: "Facebook" },
+    { icon: <FaGithub />, url: "#", label: "GitHub" },
+    { icon: <FaLinkedin />, url: "#", label: "LinkedIn" },
+    { icon: <FaTwitter />, url: "#", label: "Twitter" }
+  ];
+
   return (
     <footer className="footer-container">
-      <div className="footer-content">
-        {/* Section footer-left */}
-        <div className="footer-left">
-          {/* Liens utiles */}
-          <div className="footer-links">
-            {/* <h3>Liens utiles</h3> */}
-            <a href="/signaler-cas">Signaler un cas</a>
-            <a href="/quiz">Assistant IA</a>
-            <a href="/cartographie">Carte infografique</a>
-            <a href="/a-propos">À propos de nous</a>
-          </div>
-        </div>
-
-        {/* Divider */}
-        <div className="footer-divider"></div>
-
-        {/* Section footer-right */}
-        <div className="footer-right">
-          <h3>Partenaires officiels :</h3>
-          <Marquee pauseOnHover={true} speed={50}>
-            {partnerImages.map((img, index) => (
-              <div key={index} style={{ margin: "0 20px" }}>
-                <img src={img} alt={`Partenaire ${index + 1}`} style={{ height: "140px", width: "185px", borderRadius: "10px" }} />
-              </div>
-            ))}
-          </Marquee>
-        </div>
-      </div>
-
-      {/* Footer bottom */}
-      <div className="footer-bottom">
-        <p>©  { new Date().getFullYear() } Edden. Tous droits réservés.</p>
-      </div>
-      <div className="custom-shape-divider-bottom-1740654120">
+      {/* Top Wave Divider */}
+      <div className="custom-shape-divider-top">
         <svg
           data-name="Layer 1"
           xmlns="http://www.w3.org/2000/svg"
@@ -57,6 +51,119 @@ const Footer = () => {
             className="shape-fill"
           ></path>
         </svg>
+      </div>
+
+      <div className="footer-wrapper">
+        {/* Section Principale */}
+        <div className="footer-main">
+          {/* Section Partenaires */}
+          <div className="partners-section">
+            <div className="partners-wrapper container">
+              <h3 className="partners-title">Nos Partenaires de Confiance</h3>
+              <div className="partners-marquee">
+                <Marquee pauseOnHover={true} speed={40} gradient={false}>
+                  {partnerImages.map((img, index) => (
+                    <div key={index} className="partner-item">
+                      <img
+                        src={img}
+                        alt={`Partenaire ${index + 1}`}
+                        className="partner-logo"
+                      />
+                    </div>
+                  ))}
+                </Marquee>
+              </div>
+            </div>
+          </div>
+          <div className="footer-grid container">
+            {/* Colonne 1 - À propos */}
+            <div className="footer-column">
+              <div className="footer-logo">
+                <h2 className="logo-text">
+                  <span className="logo-gradient">Edden</span>
+                </h2>
+                <p className="logo-tagline">Innovation & Excellence</p>
+              </div>
+              <p className="footer-description">
+                Plateforme innovante dédiée à la transformation digitale et à l'excellence technologique.
+                Ensemble, construisons l'avenir.
+              </p>
+              <div className="social-links">
+                {socialLinks.map((social, index) => (
+                  <a
+                    key={index}
+                    href={social.url}
+                    className="social-link"
+                    aria-label={social.label}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {social.icon}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Colonne 2 - Liens rapides */}
+            <div className="footer-column">
+              <h3 className="column-title">Liens Rapides</h3>
+              <ul className="footer-links">
+                {quickLinks.map((link, index) => (
+                  <li key={index}>
+                    <a href={link.url}>
+                      <FaArrowRight className="link-icon" />
+                      <span>{link.name}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Colonne 3 - Contact */}
+            <div className="footer-column">
+              <h3 className="column-title">Contact</h3>
+              <ul className="contact-info">
+                <li>
+                  <FaMapMarkerAlt className="contact-icon" />
+                  <span>Antananarivo, Madagascar</span>
+                </li>
+                <li>
+                  <FaPhoneAlt className="contact-icon" />
+                  <span>+261 34 00 000 00</span>
+                </li>
+                <li>
+                  <FaEnvelope className="contact-icon" />
+                  <span>contact@edden.mg</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Colonne 4 - Newsletter */}
+            <div className="footer-column">
+              <h3 className="column-title">Newsletter</h3>
+              <p className="newsletter-text">
+                Restez informé de nos dernières actualités et innovations.
+              </p>
+            </div>
+          </div>
+        </div>
+
+
+        {/* Footer Bottom */}
+        <div className="footer-bottom">
+          <div className="footer-bottom-content container">
+            <p className="copyright">
+              © {currentYear} <strong>Edden</strong>. Tous droits réservés.
+            </p>
+            <div className="footer-bottom-links">
+              <a href="/confidentialite">Confidentialité</a>
+              <span className="separator">•</span>
+              <a href="/conditions">Conditions d'utilisation</a>
+              <span className="separator">•</span>
+              <a href="/cookies">Cookies</a>
+            </div>
+          </div>
+        </div>
       </div>
     </footer>
   );

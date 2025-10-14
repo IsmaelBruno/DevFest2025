@@ -1,77 +1,306 @@
-@import url("../../../../../styles/variables.scss");
-@import url("../../../../../styles/font.scss");
-
 .Hero_1 {
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 140vh;
+  width: 100vw;
+  background: url("../../../../../assets/svg/shape-6.svg") center no-repeat;
+  position: relative;
+  overflow: hidden;
+  padding: 2rem 4rem;
+
+  .hero-content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
-    height: 100vh;
-    width: 100vw;
-    background: url("../../../../../assets/svg/shape-6.svg");
-    background-position-x: center;
-    background-size: 80rem;
-    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 2;
+  }
 
-    .Hero1-content {
-        display: grid;
-        gap: 2rem;
-        justify-content: center;
-        text-align: center;
-        h1 {
-            font-family: "Poppins" , sans-serif;
-            font-size: 60px;
-            font-weight : 900 ;
-            letter-spacing: 5px;
-            font-weight: bold;
-            cursor: pointer;
-            color: var(--primaryColor);
-            z-index: 1000;
-            height: 80px;
+  /* --- Image gauche + bouton --- */
+  .left-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+
+   .hero-section {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; // pour la responsivité
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.hero-image,
+.hero-image1 {
+  width: 280px;
+  height: auto;
+  object-fit: contain;
+  animation: float 6s ease-in-out infinite;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+/* Image principale */
+.hero-image {
+  position: relative;
+  z-index: 1;
+}
+
+/* Image légèrement décalée à droite et en haut */
+.hero-image1 {
+  position: absolute;
+  bottom: -80px; // monte légèrement
+  left: 240px; // dépasse un peu à droite
+  z-index: 2;
+  opacity: 0.9;
+}
+
+/* --- Animation flottante --- */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+/* --- Responsivité --- */
+@media (max-width: 1024px) {
+  .hero-image1 {
+    top: -20px;
+    right: -30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    flex-direction: column;
+  }
+
+  .hero-image,
+  .hero-image1 {
+    width: 220px;
+  }
+
+  .hero-image1 {
+    position: relative;
+    top: 0;
+    right: 0;
+    opacity: 1;
+  }
+}
+
+
+    .plonger-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 1.5rem;
+      cursor: pointer;
+      font-family: "Poppins";
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      background: transparent;
+      color: var(--primaryColor);
+      border: 2px dashed var(--primaryColor);
+      box-shadow: 0 4px 15px rgba(64, 121, 255, 0.15);
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(64, 121, 255, 0.1), transparent);
+        transition: left 0.6s ease;
+      }
+
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(64, 121, 255, 0.25);
+        background: var(--primaryColor);
+        color: var(--whiteColor);
+        border: 2px solid var(--primaryColor);
+
+        &::before {
+          left: 100%;
         }
 
-        span {
-            color: var(--thirdColor);
-            font-size: 18px;
-            font-family: "Poppins";
+        .arrow-icon {
+          transform: translate(3px, -3px);
+          color: var(--whiteColor);
         }
-        .speech{
-            display: flex;
-            text-align: left;
-            justify-content: center;
-            font-style: italic;
-            font-weight: 900;
-            font-size: 16px;
-        }
-        &:hover {
-            cursor: pointer;
-        }
-        button {
-            width: 10rem;
-            display: flex;
-            justify-content: center;
-            margin: 0 auto;
-            background: linear-gradient(90deg ,var(--secondaryColor), var(--thirdColor) 100%);;
-            color: var(--whiteColor);
-            padding: 1rem 2rem;
-            border: 1px solid;
-            outline: 1.5px solid transparent;
-            border-radius: 1.5rem;
-            cursor: pointer;
-            font-family: "Poppins";
-            transition: all 0.08s ease;
-            width: 10rem;
-            animation: animate 1s infinite ease alternate;
-        }
-        @keyframes animate {
-            to{
-              transform: translateY(20px);
-            }
-          }
-       button :hover{
-                color: #ffff;
-                background: linear-gradient(90deg , var(--secondaryColor) , var(--thirdColor)100%);
-                outline: 1.5px solid transparent;
-        }
+      }
 
+      .arrow-icon {
+        transition: all 0.3s ease;
+        color: var(--primaryColor);
+
+        &.animated {
+          animation: arrowMove 0.6s ease-in-out;
+        }
+      }
+    }
+  }
+}
+
+/* --- Partie titre au centre --- */
+.Hero1-content {
+  text-align: center;
+  z-index: 2;
+
+  h1 {
+    font-size: 3.5rem;
+    font-weight: 900;
+  }
+
+  .title-decoration {
+    display: flex;
+    color: var(--warningColor);
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+}
+
+/* --- Card à droite (paragraphe) --- */
+.right-paragraph-section {
+  position: relative;
+  justify-self: end;
+  max-width: 420px;
+  padding: 1rem;
+  animation: fadeInRight 1s ease-out;
+  z-index: 3;
+
+  .grid-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239C92AC' fill-opacity='0.08'%3E%3Ccircle cx='2' cy='2' r='2'/%3E%3Ccircle cx='14' cy='14' r='2'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 34px 34px;
+    border-radius: 20px;
+    z-index: -1;
+  }
+
+  .paragraph-content {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(250, 250, 255, 0.7));
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(64, 121, 255, 0.2);
+    padding: 2rem 2.5rem;
+    transition: all 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 10px 35px rgba(64, 121, 255, 0.3);
+      transform: translateY(-4px);
     }
 
+    h3 {
+      font-family: "Poppins", sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--primaryColor);
+      margin-bottom: 1rem;
+      text-shadow: 0 0 10px rgba(64, 121, 255, 0.25);
+    }
+
+    p {
+      font-family: "Poppins", sans-serif;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--darkColor);
+      opacity: 0.85;
+      margin-bottom: 1.5rem;
+      text-align: justify;
+    }
+
+    .features-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+
+      .feature {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        font-family: "Poppins", sans-serif;
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--darkColor);
+        transition: all 0.2s ease;
+
+        svg {
+          color: var(--primaryColor);
+          filter: drop-shadow(0 0 6px rgba(64, 255, 170, 0.4));
+          transition: all 0.3s ease;
+        }
+
+        &:hover {
+          color: var(--secondaryColor);
+
+          svg {
+            transform: scale(1.2) rotate(5deg);
+            color: var(--secondaryColor);
+          }
+        }
+      }
+    }
+  }
+}
+
+/* --- Phrase en bas --- */
+.speech {
+  display: inline-block;
+  margin-top: 3rem;
+  text-align: center;
+  font-family: "Orbitron", monospace;
+  font-weight: 800;
+  letter-spacing: 1px;
+  font-size: 1.1rem;
+  color: var(--primaryColor);
+  background: linear-gradient(90deg, rgba(64, 121, 255, 0.1), rgba(64, 255, 170, 0.1));
+  padding: 1rem 2rem;
+  border-radius: 20px;
+  border: 1px solid rgba(64, 121, 255, 0.2);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 20px rgba(64, 121, 255, 0.15);
+  transition: all 0.3s ease;
+  z-index: 3;
+
+  &:hover {
+    background: linear-gradient(90deg, rgba(64, 121, 255, 0.2), rgba(64, 255, 170, 0.2));
+    transform: scale(1.02);
+    box-shadow: 0 6px 25px rgba(64, 255, 170, 0.25);
+  }
+}
+
+/* --- Animation apparente du card --- */
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }

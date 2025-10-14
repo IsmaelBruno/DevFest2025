@@ -58,7 +58,6 @@ export class UsersController {
     @UploadedFile() file: Express.Multer.File,
     @Body() body: Partial<User>,
   ): Promise<User> {
-    // Ajouter le chemin de l'image dans le body avant création
     if (file) {
       body.profileUrl = `/uploads/${file.filename}`;
     }

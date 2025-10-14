@@ -5,6 +5,8 @@ import StatsCard from '../../Components/admin/StatsCard/StatsCard';
 import ProjectCard from '../../Components/admin/ProjectCard/ProjectCard';
 import RecentTransactions from '../../Components/admin/RecentTransaction/RecentTransaction';
 import Chart from '../../Components/admin/Chart/Chart';
+import robot from "../../assets/Images/GIF/Robot.gif";
+import accord from "../../assets/Images/Jpeg/illu.jpeg"
 import './adminDashboard.scss';
 
 const Dashboard = () => {
@@ -143,6 +145,7 @@ const Dashboard = () => {
           <div className="dashboard__welcome-content">
             <h2>BIENVENU DANS VOTRE DASHBOARD EDDEN</h2>
             <div className="dashboard__welcome-illustration">
+                <img src={robot} alt="Robot" className="Robot-image"/>
             </div>
           </div>
         </div>
@@ -195,6 +198,7 @@ const Dashboard = () => {
                 options={{ ...doughnutOptions, maintainAspectRatio: false }}
               />
             </div>
+           
           </div>
         </div>
       </main>

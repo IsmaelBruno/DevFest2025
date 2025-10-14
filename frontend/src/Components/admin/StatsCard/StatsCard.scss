@@ -4,8 +4,8 @@
 .stats-card {
   @include mix.card;
   transition: all 0.3s ease;
-  background: var(--primaryColor);
-  color: var(--whiteColor);
+  background: var(--whiteColor);
+  color: var(--primaryColor);
 
   &__content {
     display: flex;
@@ -34,7 +34,7 @@
 
   // États de survol
   &:hover {
-    background-color: var(--primaryColor);
+    background: linear-gradient(90deg, var(--primaryColor), var(--secondaryColor),var(--primaryColor));
     
     .stats-card__value,
     .stats-card__title,
@@ -45,42 +45,52 @@
 
   // Variantes de couleur
   &--yellow {
-    background-color: var(--primaryColor);
-    color: var(--whiteColor);
+    background: url('../../../assets/svg/circled-stripe.svg');
+    background-position: right;
+    background-size: contain;
+    background-repeat: no-repeat;
+    color: var(--primaryColor);
+    border: 2px dashed var(--primaryColor);
 
     &:hover {
-      background: var(--primaryColor);
       color: var(--whiteColor);
     }
       &::after {
           content: "";
           position: absolute;
-          bottom: -8px;
+          bottom: -12px;
           left: 50%;
           transform: translateX(-50%);
           width: 370px;
           height: 4px;
-          background-color: var(--thirdColor);
+          background-color: var(--primaryColor);
           opacity: 0.3;
         }
   }
 
   &--gray {
-    background: var(--primaryColor);
-    color: var(--whiteColor);
+    background: url('../../../assets/svg/circled-stripe.svg');
+    background-position: right;
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
+    color: var(--primaryColor);
+    border: 2px dashed var(--primaryColor);
 
-    &:hover {
+
+   &:hover {
       color: var(--whiteColor);
     }
       &::after {
           content: "";
           position: absolute;
-          bottom: -8px;
+          bottom: -12px;
           left: 50%;
           transform: translateX(-50%);
           width: 370px;
           height: 4px;
-          background-color: var(--thirdColor);
+          background-color: var(--primaryColor);
           opacity: 0.3;
         }
   }
