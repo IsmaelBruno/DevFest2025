@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { mockProducts } from '../../../data/mockProducts';
-import { Sword, Scroll, Cross, FlaskConical, Skull, Shield, Truck, MapPin , Star } from 'lucide-react';
+import { FileText, Shield, Package, UserCheck , Star , Truck , MapPin} from 'lucide-react';
 import CheckoutForm from './CheckoutForm';
 import "./ProductDetails.scss";
 
@@ -29,14 +29,13 @@ function ProductDetails() {
           />
           <div className="product-meta">
             <div className="product-category">
-              {product.category === "Armes Divines" && <Sword size={16} />}
-              {product.category === "Artéfacts Mystiques" && <Scroll size={16} />}
-              {product.category === "Reliques Sacrées" && <Cross size={16} />}
-              {product.category === "Artéfacts Alchimiques" && <FlaskConical size={16} />}
-              {product.category === "Armes Légendaires" && <Sword size={16} />}
-              {product.category === "Artéfacts Bibliques" && <Skull size={16} />}
-              <span>{product.category}</span>
-            </div>
+  {product.category === "Pack Scans" && <CreditCard size={16} />}
+  {product.category === "Analyses Avancées" && <FileText size={16} />}
+  {product.category === "Crédits de Vérification" && <Shield size={16} />}
+  {product.category === "Abonnements" && <Package size={16} />}
+  {product.category === "Premium" && <UserCheck size={16} />}
+  <span>{product.category}</span>
+</div>
             
             <div className="product-rating">
               {[...Array(5)].map((_, i) => (

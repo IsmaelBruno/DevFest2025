@@ -1,22 +1,33 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from "framer-motion";
-import { Search, ShoppingCart, Star, CreditCard, Sword, Shield as ShieldIcon, Scroll, FlaskConical, Cross, Skull } from 'lucide-react';
+
+// Icônes plus adaptées au scan / boutique
+import {
+  Search,
+  ShoppingCart,
+  Star,
+  CreditCard,
+  Shield,
+  FileText,
+  Database,
+  UserCheck,
+  Package,
+} from 'lucide-react';
+
 import SparklesText from '../../../Components/SparkleText/SparkleText';
 import { mockProducts } from '../../../data/mockProducts';
 import './Shop.scss';
 
-
+// 👉 Catégories réalistes pour MadaScan
 const categories = [
   "Tous",
-  "Armes Divines",
-  "Artéfacts Mystiques",
-  "Reliques Sacrées",
-  "Artéfacts Alchimiques",
-  "Armes Légendaires",
-  "Artéfacts Bibliques"
+  "Pack Scans",
+  "Analyses Avancées",
+  "Crédits de Vérification",
+  "Abonnements",
+  "Premium"
 ];
-
 
 function Shop() {
   const [products, setProducts] = useState(mockProducts);
@@ -24,18 +35,16 @@ function Shop() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("Tous");
   const [sortBy, setSortBy] = useState("default");
-   const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  // Filtrage et recherche
+  // Filtrage, recherche et tri
   useEffect(() => {
     let filtered = products;
 
-    // Filtrage par catégorie
     if (selectedCategory !== "Tous") {
       filtered = filtered.filter(product => product.category === selectedCategory);
     }
 
-    // Recherche par nom
     if (searchTerm) {
       filtered = filtered.filter(product =>
         product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -43,8 +52,6 @@ function Shop() {
       );
     }
 
-    // Tri
-    
     switch (sortBy) {
       case 'price-asc':
         filtered = [...filtered].sort((a, b) => a.price - b.price);
@@ -65,53 +72,16 @@ function Shop() {
     setFilteredProducts(filtered);
   }, [searchTerm, selectedCategory, sortBy, products]);
 
-   const handleProductClick = (product) => {
-    navigate(`/edden-app/shop-edden/product/${product.id}`); // Rediriger vers la page de détails
-  };
-
-  const handlePaymentInputChange = (e) => {
-    const { name, value } = e.target;
-    setPaymentData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const formatCardNumber = (value) => {
-    const v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
-    const matches = v.match(/\d{4,16}/g);
-    const match = matches && matches[0] || '';
-    const parts = [];
-    for (let i = 0, len = match.length; i < len; i += 4) {
-      parts.push(match.substring(i, i + 4));
-    }
-    if (parts.length) {
-      return parts.join(' ');
-    } else {
-      return v;
-    }
-  };
-
-  const handleCardNumberChange = (e) => {
-    const formatted = formatCardNumber(e.target.value);
-    setPaymentData(prev => ({
-      ...prev,
-      cardNumber: formatted
-    }));
-  };
-
-  const handlePayment = () => {
-    // Simulation du paiement
-    alert(`Paiement de ${selectedProduct.price}Ar en cours...`);
-    setShowPaymentModal(false);
-    setSelectedProduct(null);
+  // Redirige vers détails produit
+  const handleProductClick = (product) => {
+    // ⚠ Vérifie que ta route correspond bien à /madascan/... ou similaire
+    navigate(`/madascan-app/premium/product/${product.id}`);
   };
 
   return (
     <div className="shop-container">
-      {/* Header avec recherche */}
+      {/* Header + recherche */}
       <div className="shop-header">
-      
         <div className="header-content">
           <motion.h1
             className="shop-title"
@@ -119,11 +89,11 @@ function Shop() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
           >
-          <SparklesText className="custom-texte">
-            Edden Boutique
-          </SparklesText>
+            <SparklesText className="custom-texte">
+              MadaScan Store
+            </SparklesText>
           </motion.h1>
-          <p className="shop-subtitle">Découvrez nos produits premium</p>
+          <p className="shop-subtitle">Découvrez nos offres d’analyse IA</p>
 
           <div className="search-section">
             <div className="search-bar">
@@ -168,28 +138,17 @@ function Shop() {
 
             <div className="product-info">
               <div className="product-category">
-                {product.category === "Armes Divines" && <Sword size={16} className="category-icon" />}
-                {product.category === "Artéfacts Mystiques" && <Scroll size={16} className="category-icon" />}
-                {product.category === "Reliques Sacrées" && <Cross size={16} className="category-icon" />}
-                {product.category === "Artéfacts Alchimiques" && <FlaskConical size={16} className="category-icon" />}
-                {product.category === "Armes Légendaires" && <Sword size={16} className="category-icon" />}
-                {product.category === "Artéfacts Bibliques" && <Skull size={16} className="category-icon" />}
+                {/* Icônes conditionnelles selon nouvelle catégorie */}
+                {product.category === "Pack Scans" && <CreditCard size={16} className="category-icon" />}
+                {product.category === "Analyses Avancées" && <FileText size={16} className="category-icon" />}
+                {product.category === "Crédits de Vérification" && <Shield size={16} className="category-icon" />}
+                {product.category === "Abonnements" && <Package size={16} className="category-icon" />}
+                {product.category === "Premium" && <UserCheck size={16} className="category-icon" />}
                 <span>{product.category}</span>
               </div>
+
               <h3 className="product-name">{product.name}</h3>
               <p className="product-description">{product.description}</p>
-
-              {/* <div className="product-rating">
-                <div className="stars">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className={`star ${i < Math.floor(product.rating) ? 'filled' : ''}`}
-                    />
-                  ))}
-                  <span className="rating-text">{product.rating} ({product.reviews})</span>
-                </div>
-              </div> */}
 
               <div className="product-pricing">
                 <div className="current-price">{product.price} Ar</div>

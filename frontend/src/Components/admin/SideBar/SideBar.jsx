@@ -1,5 +1,5 @@
 import { BarChart3, Users, Folder ,LogOut} from 'lucide-react';
-import './Sidebar.scss';
+import './SideBar.scss';
 
 const Sidebar = () => {
   return (

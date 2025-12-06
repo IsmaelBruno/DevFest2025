@@ -1,6 +1,6 @@
-@import '../../../../../styles/abstracts/spacing.scss';
-@import '../../../../../styles/abstracts/borderRadius.scss';
-@import '../../../../../styles/abstracts/mixin.scss';
+@use '../../../../../styles/abstracts/spacing.scss';
+@use '../../../../../styles/abstracts/borderRadius.scss';
+@use '../../../../../styles/abstracts/mixin.scss';
 
 .Hero_5 {
     width: 100%;
@@ -195,119 +195,109 @@
         }
     }
 
-    // Carte à droite
-    .hero-card {
-        background: rgba(255, 255, 255, 0.1);
-        width : 90%;
+    // Blob à droite
+    .hero-blob {
+        position: relative;
+        width: 90%;
         height: 90%;
-        backdrop-filter: blur(20px);
-        border-radius: 1.5rem;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        overflow: hidden;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        transition: transform 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-        &:hover {
-            transform: translateY(-5px);
-        }
-
-        .card-image {
-            position: relative;
+        .blob-svg {
+            position: absolute;
             width: 100%;
-            height: 300px;
-            overflow: hidden;
+            height: 100%;
+            filter: drop-shadow(0 20px 60px rgba(37, 210, 241, 0.3));
+            animation: blob-animation 8s ease-in-out infinite;
 
-            .card-video {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-
-            .card-badge {
-                position: absolute;
-                top: 1rem;
-                right: 1rem;
-                display: flex;
-                align-items: center;
-                gap: 0.5rem;
-                padding: 0.5rem 1rem;
-                background: rgba(223, 11, 11, 0.9);
-                color: white;
-                font-size: 0.875rem;
-                font-weight: 600;
-                border-radius: 2rem;
-                backdrop-filter: blur(10px);
-
-                .badge-dot {
-                    width: 8px;
-                    height: 8px;
-                    background: white;
-                    border-radius: 50%;
-                    animation: pulse 2s ease-in-out infinite;
-                }
+            .blob-path {
+                filter: drop-shadow(0 10px 30px rgba(37, 210, 241, 0.2));
             }
         }
 
-        .card-content {
+        .blob-content {
+            position: relative;
+            z-index: 2;
             padding: 2rem;
-            color: var(--whiteColor);
+            color: var(--darkFontColor);
+            text-align: left;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 1rem;
+            max-width: 100%;
 
-            .card-title {
-                font-size: 1.5rem;
-                font-weight: 700;
-                margin-bottom: 1rem;
+            .blob-title {
+                font-size: 1.75rem;
+                font-weight: 800;
                 background: linear-gradient(135deg,
-                        var(--whiteColor) 0%,
-                        var(--secondaryColor) 100%);
+                        rgba(4, 113, 133, 1) 0%,
+                        rgba(37, 210, 241, 1) 100%);
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
                 background-clip: text;
+                margin: 0;
+                margin-bottom: 0.25rem;
             }
 
-            .card-description {
-                font-size: 1rem;
-                line-height: 1.6;
-                color: rgba(255, 255, 255, 0.8);
-                margin-bottom: 1.5rem;
-            }
-
-            .card-footer {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding-top: 1.5rem;
-                border-top: 1px solid rgba(255, 255, 255, 0.1);
-
-                .card-stat {
-                    display: flex;
-                    align-items: center;
-                    gap: 0.5rem;
-                    color: var(--secondaryColor);
-                    font-size: 0.875rem;
-                    font-weight: 600;
+            .blob-section {
+                h4.blob-subtitle {
+                    font-size: 0.75rem;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    letter-spacing: 0.05em;
+                    color: rgba(4, 113, 133, 0.8);
+                    margin: 0 0 0.5rem 0;
                 }
 
-                .card-link {
+                .blob-list {
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
                     display: flex;
-                    align-items: center;
-                    gap: 0.5rem;
-                    color: var(--whiteColor);
-                    font-size: 0.875rem;
-                    font-weight: 600;
-                    cursor: pointer;
-                    transition: all 0.3s ease;
+                    flex-direction: column;
+                    gap: 0.3rem;
 
-                    &:hover {
-                        color: var(--secondaryColor);
+                    li {
+                        font-size: 0.8rem;
+                        color: rgba(0, 0, 0, 0.7);
+                        padding-left: 1rem;
+                        position: relative;
 
-                        svg {
-                            transform: translate(3px, -3px);
+                        &:before {
+                            content: "✓";
+                            position: absolute;
+                            left: 0;
+                            color: rgba(37, 210, 241, 0.9);
+                            font-weight: bold;
                         }
                     }
+                }
+            }
+
+            .blob-link {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                color: rgba(4, 113, 133, 1);
+                font-size: 0.875rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                margin-top: 0.5rem;
+
+                &:hover {
+                    color: rgba(37, 210, 241, 1);
 
                     svg {
-                        transition: transform 0.3s ease;
+                        transform: translate(3px, -3px);
                     }
+                }
+
+                svg {
+                    transition: transform 0.3s ease;
                 }
             }
         }
@@ -315,7 +305,6 @@
 
     // Animations
     @keyframes sparkle {
-
         0%,
         100% {
             transform: scale(1) rotate(0deg);
@@ -329,7 +318,6 @@
     }
 
     @keyframes pulse {
-
         0%,
         100% {
             opacity: 1;
@@ -339,6 +327,25 @@
         50% {
             opacity: 0.5;
             transform: scale(0.8);
+        }
+    }
+
+    @keyframes blob-animation {
+        0%,
+        100% {
+            transform: translate(0, 0) scale(1);
+        }
+
+        25% {
+            transform: translate(10px, -10px) scale(1.02);
+        }
+
+        50% {
+            transform: translate(-5px, 15px) scale(0.98);
+        }
+
+        75% {
+            transform: translate(-10px, -5px) scale(1.01);
         }
     }
 
@@ -386,8 +393,22 @@
             }
         }
 
-        .hero-card .card-image {
-            height: 200px;
+        .hero-blob .blob-content {
+            padding: 2rem 1.5rem;
+
+            .blob-title {
+                font-size: 1.5rem;
+            }
+
+            .blob-section {
+                h4.blob-subtitle {
+                    font-size: 0.75rem;
+                }
+
+                .blob-list li {
+                    font-size: 0.85rem;
+                }
+            }
         }
     }
 }
@@ -401,26 +422,22 @@
                     rgba(67, 209, 248, 0.7) 50%,
                     rgba(79, 226, 252, 0.5) 100%);
         }
-
-        .hero-card {
-            background: rgba(21, 33, 56, 0.6);
-            border: 1px solid rgba(67, 209, 248, 0.2);
-        }
     }
 }
-.svg-grid-overlay {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  pointer-events: none;
-  mix-blend-mode: normal; // ou 'screen' si tu veux un effet subtil lumineux
-  opacity: 0.5; // adapte selon le rendu
 
-  svg {
+.svg-grid-overlay {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
-    display: block;
-  }
+    z-index: 1;
+    pointer-events: none;
+    mix-blend-mode: normal;
+    opacity: 0.5;
+
+    svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
 }

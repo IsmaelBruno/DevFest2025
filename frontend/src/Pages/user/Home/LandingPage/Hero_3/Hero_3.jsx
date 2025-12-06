@@ -29,46 +29,46 @@ function Hero_3() {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log('Feedback soumis:', formData);
-        // Ajoutez ici votre logique d'envoi
     };
 
     return (
         <div className="Hero_3">
             <ScrollVelocity
-                texts={['Edden', 'WebApplication Technologie Innovation Passion']}
+                texts={['MadaScan', 'Scan Intelligent • Analyse Instantanée • IA Made in Mada']}
                 velocity={100}
                 className="custom-scroll-text"
             />
 
             <div className="feedback-section">
                 <div className="feedback-container container">
-                    {/* Contenu à gauche */}
+
+                    {/* Texte à gauche */}
                     <div className="feedback-left">
-                        
                         <div className="feedback-content">
                             <div className="content-badge">
                                 <MessageSquare size={18} />
-                                <span>Votre Avis Compte</span>
+                                <span>Votre avis compte</span>
                             </div>
                             
                             <h2 className="feedback-title">
-                                Partagez Votre
-                                <span className="title-gradient"> Expérience</span>
+                                Améliorons
+                                <span className="title-gradient"> MadaScan Ensemble</span>
                             </h2>
                             
                             <p className="feedback-description">
-                                Votre retour est précieux pour nous aider à améliorer constamment nos services. 
-                                Chaque avis nous permet de créer une meilleure expérience pour tous nos utilisateurs.
+                                Vos suggestions nous aident à rendre MadaScan plus précis, plus rapide
+                                et plus intelligent. Merci de contribuer à l’évolution d’un outil 
+                                technologique conçu pour Madagascar.
                             </p>
 
                             <div className="feedback-stats">
                                 <div className="stat-box">
                                     <div className="stat-number">2.5K+</div>
-                                    <div className="stat-label">Avis Reçus</div>
+                                    <div className="stat-label">Avis reçus</div>
                                 </div>
                                 <div className="stat-box">
                                     <div className="stat-number">4.9/5</div>
-                                    <div className="stat-label">Note Moyenne</div>
+                                    <div className="stat-label">Note moyenne</div>
                                 </div>
                                 <div className="stat-box">
                                     <div className="stat-number">98%</div>
@@ -83,10 +83,9 @@ function Hero_3() {
                         <form className="feedback-form" onSubmit={handleSubmit}>
                             <div className="form-header">
                                 <h3 className="form-title">Donnez-nous votre avis</h3>
-                                <p className="form-subtitle">Nous sommes à l'écoute de vos retours</p>
+                                <p className="form-subtitle">Aidez-nous à perfectionner MadaScan</p>
                             </div>
 
-                            {/* Nom */}
                             <div className="form-group">
                                 <label htmlFor="name" className="form-label">
                                     <User size={18} />
@@ -104,7 +103,6 @@ function Hero_3() {
                                 />
                             </div>
 
-                            {/* Email */}
                             <div className="form-group">
                                 <label htmlFor="email" className="form-label">
                                     <Mail size={18} />
@@ -116,17 +114,16 @@ function Hero_3() {
                                     name="email"
                                     value={formData.email}
                                     onChange={handleChange}
-                                    placeholder="votre.email@exemple.com"
+                                    placeholder="exemple@mail.com"
                                     className="form-input"
                                     required
                                 />
                             </div>
 
-                            {/* Évaluation */}
                             <div className="form-group">
                                 <label className="form-label">
                                     <Star size={18} />
-                                    <span>Évaluation</span>
+                                    <span>Votre note</span>
                                 </label>
                                 <div className="rating-stars">
                                     {[1, 2, 3, 4, 5].map((star) => (
@@ -145,7 +142,6 @@ function Hero_3() {
                                 </div>
                             </div>
 
-                            {/* Message */}
                             <div className="form-group">
                                 <label htmlFor="message" className="form-label">
                                     <MessageSquare size={18} />
@@ -156,20 +152,20 @@ function Hero_3() {
                                     name="message"
                                     value={formData.message}
                                     onChange={handleChange}
-                                    placeholder="Partagez votre expérience avec nous..."
+                                    placeholder="Expliquez votre expérience avec MadaScan..."
                                     className="form-textarea"
                                     rows="5"
                                     required
                                 ></textarea>
                             </div>
 
-                            {/* Bouton Submit */}
                             <button type="submit" className="submit-button">
                                 <span>Envoyer mon avis</span>
                                 <Send size={20} />
                             </button>
                         </form>
                     </div>
+
                 </div>
             </div>
         </div>

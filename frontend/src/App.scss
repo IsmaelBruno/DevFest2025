@@ -1,6 +1,6 @@
-@import url(./styles/font.scss);
-@import url(./styles/variables.scss);
-@import url(./styles/abstracts/mixin.scss);
+@use "./styles/abstracts/spacing.scss";
+@use './styles/abstracts/borderRadius.scss';
+@use './styles/abstracts/mixin.scss';
 
 * {
   margin: 0;

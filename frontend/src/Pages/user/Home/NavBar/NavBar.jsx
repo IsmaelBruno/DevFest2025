@@ -1,27 +1,41 @@
 import React from "react";
 import "./NavBar.scss";
 import { NavLink } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
-import { LuHouse, LuCamera, LuSettings, LuActivity, LuShoppingCart, LuMenu, LuX } from "react-icons/lu";
-import grec from "../../../../assets/Images/grec.png";
+import { motion } from "framer-motion";
+
+import { 
+  LuHouse,
+  LuCamera,
+  LuActivity,
+  LuClock,
+  LuCircleHelp,
+  LuSettings,
+  LuCrown,
+  LuMenu,
+  LuX
+} from "react-icons/lu";
+
+import logo from "../../../../assets/Images/grec.png";
 
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isScrolled, setIsScrolled] = React.useState(false);
 
-  // ✅ Correction du scroll
   React.useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // 🔥 Nouveaux items adaptés à MadaScan
   const menuItems = [
     { path: "", label: "Accueil", icon: LuHouse },
-    { path: "live", label: "Live", icon: LuCamera },
-    { path: "solution", label: "Solution", icon: LuSettings },
-    { path: "prediction", label: "Prédire", icon: LuActivity },
-    { path: "shop-edden", label: "Espace achat", icon: LuShoppingCart },
+    { path: "scanner", label: "Scanner", icon: LuCamera },
+    { path: "analyse", label: "Analyse IA", icon: LuActivity },
+    { path: "historique", label: "Historique", icon: LuClock },
+    { path: "help", label: "Aide", icon: LuCircleHelp },
+    { path: "communaute", label: "Communauté", icon: LuSettings },
+    { path: "premium", label: "Premium", icon: LuCrown },
   ];
 
   const menuItemVariants = {
@@ -29,21 +43,20 @@ const NavBar = () => {
     visible: (index) => ({
       opacity: 1,
       y: 0,
-      transition: { delay: index * 0.1, duration: 0.4, ease: "easeOut" },
+      transition: { delay: index * 0.1, duration: 0.45, ease: "easeOut" },
     }),
   };
 
   return (
     <nav className={`nav-container ${isScrolled ? "scrolled" : ""}`}>
-      {/* Logos apparaissent seulement après scroll */}
+      
       {isScrolled && (
         <>
-          <motion.img src={grec} alt="logo" className="grec-logo left" />
-          <motion.img src={grec} alt="logo" className="grec-logo right" />
+          <motion.img src={logo} alt="logo" className="grec-logo left" />
+          <motion.img src={logo} alt="logo" className="grec-logo right" />
         </>
       )}
 
-      {/* Bouton hamburger (mobile) */}
       <button
         className="menu-toggle"
         onClick={() => setIsMenuOpen((prev) => !prev)}
@@ -64,14 +77,14 @@ const NavBar = () => {
               animate="visible"
             >
               <NavLink
-                to={`/edden-app/${item.path}`}
+                to={`/madascan-app/${item.path}`}
                 className={({ isActive }) =>
                   isActive ? "nav-link active" : "nav-link"
                 }
                 end
                 onClick={() => setIsMenuOpen(false)}
               >
-                {Icon && <Icon className="nav-icon" />}
+                <Icon className="nav-icon" />
                 {item.label}
               </NavLink>
             </motion.li>
