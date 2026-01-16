@@ -136,7 +136,7 @@ const Hero_2 = () => {
           transition={{ duration: 1.5, ease: "easeOut" }}
         >
           <TrueFocus
-            sentence="C'est quoi MadScan ?"
+            sentence="C'est quoi MADASCAN ?"
             manualMode={false}
             blurAmount={5}
             borderColor="#047185"
@@ -152,11 +152,11 @@ const Hero_2 = () => {
         <div className="section section-1">
           <motion.div className="section-content" variants={containerVariants} initial="hidden" whileInView="visible">
             <motion.h2 variants={itemVariants}>
-              <CircularText text="MADSCAN SYSTEM" spinDuration={20} />
+              <CircularText text="MADASCAN SYSTEM" spinDuration={20} />
             </motion.h2>
             <motion.p className="subtitle" variants={itemVariants}>Analyse & Authenticité</motion.p>
             <motion.p className="description" variants={itemVariants}>
-              MadScan vous aide à distinguer le vrai du faux grâce à des analyses avancées d’images, vidéos et contenus générés par IA.
+              MadaScan vous aide à distinguer le vrai du faux grâce à des analyses avancées d’images, vidéos et contenus générés par IA.
             </motion.p>
           </motion.div>
 
@@ -172,7 +172,7 @@ const Hero_2 = () => {
           <motion.div className="text-section2" initial={{ opacity: 0, x: -100 }} whileInView={{ opacity: 1, x: 0 }}>
             <motion.h2 className="primary-text">Notre vision pour un 🇲🇬 mieux informé</motion.h2>
             <motion.span>
-              MadScan lutte contre la désinformation numérique à Madagascar en analysant automatiquement les contenus suspects.
+              MadaScan lutte contre la désinformation numérique à Madagascar en analysant automatiquement les contenus suspects.
             </motion.span>
           </motion.div>
 
@@ -192,13 +192,13 @@ const Hero_2 = () => {
 
         {/* SECTION 3 */}
         <div className="section section-3">
-          <motion.h2>Pourquoi MadScan est unique ?</motion.h2>
+          <motion.h2>Pourquoi MadaScan est unique ?</motion.h2>
 
           <motion.div className="professional-cards-container">
             <motion.div className="professional-card blue-card" whileHover={{ scale: 1.05, y: -5 }}>
               <div className="card-icon"><Bolt size={32} /></div>
               <h3>Détection IA de haute précision</h3>
-              <p>MadScan identifie les vidéos truquées, images modifiées et contenus générés par IA.</p>
+              <p>MadaScan identifie les vidéos truquées, images modifiées et contenus générés par IA.</p>
               <div className="card-features">
                 <span className="feature-tag"><Zap size={14} /> Analyse IA</span>
                 <span className="feature-tag"><Shield size={14} /> Protection</span>

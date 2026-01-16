@@ -1,26 +1,38 @@
-import { BarChart3, Users, Folder ,LogOut} from 'lucide-react';
+// Components/admin/SideBar/SideBar.jsx
+import { NavLink } from 'react-router-dom';
+import { BarChart3, Users, Folder, LogOut } from 'lucide-react';
 import './SideBar.scss';
 
 const Sidebar = () => {
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.href = '/madascan-app/auth';
+  };
+
   return (
     <aside className="sidebar">
       <nav className="sidebar__nav">
-        <div className="sidebar__item sidebar__item--active">
+        <NavLink 
+          to="/madascan-app/admin/dashboard" 
+          className={({ isActive }) => 
+            `sidebar__item ${isActive ? 'sidebar__item--active' : ''}`
+          }
+        >
           <BarChart3 size={20} />
-        </div>
-        <div className="sidebar__item">
-          <Folder size={20} />
-        </div>
-        <div className="sidebar__item">
+          <span className="sidebar__tooltip">Tableau de bord</span>
+        </NavLink>
+        
+        <NavLink 
+          to="/madascan-app/admin/users" 
+          className={({ isActive }) => 
+            `sidebar__item ${isActive ? 'sidebar__item--active' : ''}`
+          }
+        >
           <Users size={20} />
-        </div>
+          <span className="sidebar__tooltip">Utilisateurs</span>
+        </NavLink>
       </nav>
       
-      <div className="sidebar__bottom">
-        <div className="sidebar__item">
-          <div className="sidebar__avatar"><LogOut size={25}/></div>
-        </div>
-      </div>
     </aside>
   );
 };

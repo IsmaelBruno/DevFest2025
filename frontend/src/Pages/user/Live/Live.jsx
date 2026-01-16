@@ -1,260 +1,283 @@
+// components/Live/Live.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { Heart, MessageCircle, Share, Send, MoreHorizontal, User } from 'lucide-react';
+import { 
+  Heart, MessageCircle, Share, Send, MoreHorizontal, User, 
+  Flame, Eye, Clock, Zap, Users, ThumbsUp, Reply
+} from 'lucide-react';
 import './Live.scss';
 
 function Live() {
   const [videos, setVideos] = useState([]);
   const [currentVideo, setCurrentVideo] = useState(0);
-  const [comments, setComments] = useState({});
+  const [liveMessages, setLiveMessages] = useState([]);
   const [newComment, setNewComment] = useState('');
-  const [activeUsers, setActiveUsers] = useState([]);
-  const containerRef = useRef(null);
-  const commentsEndRef = useRef(null);
+  const [viewerCount, setViewerCount] = useState(1247);
+  const [isLiked, setIsLiked] = useState(false);
+  const messagesEndRef = useRef(null);
 
-  // Récupérer des vidéos depuis l'API YouTube
+  // Messages simulés
+  const simulatedMessages = [
+    { user: 'AI_Researcher', text: 'Les imperfections dans les yeux sont souvent un bon indicateur 👁️' },
+    { user: 'Tech_Sleuth', text: 'Regardez les reflets dans les lunettes ! 🕶️' },
+    { user: 'Digital_Forensic', text: 'Les mains générées par IA ont souvent 6 doigts 🤚' },
+    { user: 'Security_Expert', text: 'Les deepfakes audio ont des respirations trop parfaites 🎤' },
+    { user: 'AI_Analyst', text: 'Checkez les métadonnées EXIF des images 📸' },
+  ];
+
   useEffect(() => {
-    const fetchVideos = async () => {
-      try {
-        const response = await axios.get(
-          `https://www.googleapis.com/youtube/v3/search`,
-          {
-            params: {
-              part: 'snippet',
-              maxResults: 10,
-              key: 'AIzaSyCDZXehB1gnGImiXZ-51JeERE-NBq7NuFM',
-              q: 'short',
-              type: 'video'
-            }
-          }
-        );
-        
-        const videosData = response.data.items.map(item => ({
-          id: item.id.videoId,
-          url: `https://www.youtube.com/embed/${item.id.videoId}?autoplay=1&mute=1`,
-          title: item.snippet.title,
-          likes: Math.floor(Math.random() * 10000) + 1000,
-          comments: Math.floor(Math.random() * 500) + 50,
-          shares: Math.floor(Math.random() * 200) + 10
-        }));
-        
-        setVideos(videosData);
-        
-        // Initialiser les commentaires pour chaque vidéo
-        const initialComments = {};
-        videosData.forEach(video => {
-          initialComments[video.id] = [
-            {
-              id: 1,
-              user: 'Alexandre',
-              text: 'Super contenu ! Très inspirant 👍',
-              time: '2 min',
-              likes: 12
-            },
-            {
-              id: 2,
-              user: 'Sophie',
-              text: 'J\'adore cette créativité !',
-              time: '5 min',
-              likes: 8
-            }
-          ];
-        });
-        setComments(initialComments);
-        
-        // Simuler des utilisateurs actifs
-        setActiveUsers([
-          { id: 1, name: 'Marie', isLive: true },
-          { id: 2, name: 'Thomas', isLive: false },
-          { id: 3, name: 'Julie', isLive: true },
-          { id: 4, name: 'David', isLive: false }
-        ]);
-      } catch (error) {
-        console.error('Error fetching videos:', error);
-      }
-    };
-
     fetchVideos();
+    
+    // Simuler de nouveaux messages
+    const interval = setInterval(() => {
+      const randomMsg = simulatedMessages[Math.floor(Math.random() * simulatedMessages.length)];
+      const newMsg = {
+        id: Date.now(),
+        user: randomMsg.user,
+        text: randomMsg.text,
+        time: 'À l\'instant',
+        likes: 0,
+      };
+      
+      setLiveMessages(prev => [...prev.slice(-15), newMsg]);
+      setViewerCount(prev => prev + Math.floor(Math.random() * 5) - 2);
+    }, 5000);
+
+    return () => clearInterval(interval);
   }, []);
 
-  // Scroll vers le bas des commentaires
   useEffect(() => {
-    commentsEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [comments]);
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [liveMessages]);
 
-  const handleScroll = (e) => {
-    const container = containerRef.current;
-    const scrollPosition = container.scrollTop;
-    const windowHeight = window.innerHeight;
-    const newIndex = Math.round(scrollPosition / windowHeight);
-    
-    if (newIndex !== currentVideo) {
-      setCurrentVideo(newIndex);
+  const fetchVideos = async () => {
+    try {
+      const response = await axios.get(
+        `https://www.googleapis.com/youtube/v3/search`,
+        {
+          params: {
+            part: 'snippet',
+            maxResults: 10,
+            key: 'AIzaSyCDZXehB1gnGImiXZ-51JeERE-NBq7NuFM',
+            q: 'tutoriel détection IA deepfake',
+            type: 'video',
+            order: 'relevance',
+            relevanceLanguage: 'fr'
+          }
+        }
+      );
+      
+      const videosData = response.data.items.map(item => ({
+        id: item.id.videoId,
+        url: `https://www.youtube.com/embed/${item.id.videoId}?autoplay=1&mute=0&controls=1`,
+        title: item.snippet.title,
+        channel: item.snippet.channelTitle,
+        thumbnail: item.snippet.thumbnails.high.url,
+        likes: Math.floor(Math.random() * 1000) + 100,
+        comments: Math.floor(Math.random() * 200) + 20,
+        shares: Math.floor(Math.random() * 100) + 10,
+        views: Math.floor(Math.random() * 50000) + 5000
+      }));
+      
+      setVideos(videosData);
+      
+      // Messages initiaux
+      setLiveMessages([
+        { 
+          id: 1, 
+          user: 'AI_Detective', 
+          text: 'Quels sont les signes les plus évidents d\'une image générée par IA ?', 
+          time: '2 min', 
+          likes: 12 
+        },
+        { 
+          id: 2, 
+          user: 'Tech_Guardian', 
+          text: 'Les deepfakes audio sont de plus en plus réalistes !', 
+          time: '5 min', 
+          likes: 5 
+        },
+        { 
+          id: 3, 
+          user: 'Digital_Expert', 
+          text: 'Quels outils recommandez-vous pour la détection ?', 
+          time: '8 min', 
+          likes: 8 
+        }
+      ]);
+    } catch (error) {
+      console.error('Error fetching videos:', error);
     }
   };
 
-  const handleAddComment = (videoId) => {
+  const handleAddMessage = () => {
     if (newComment.trim()) {
-      const comment = {
+      const message = {
         id: Date.now(),
         user: 'Vous',
         text: newComment,
-        time: 'Maintenant',
-        likes: 0
+        time: 'À l\'instant',
+        likes: 0,
       };
       
-      setComments(prev => ({
-        ...prev,
-        [videoId]: [...(prev[videoId] || []), comment]
-      }));
+      setLiveMessages(prev => [...prev, message]);
       setNewComment('');
     }
   };
 
-  const handleLikeComment = (videoId, commentId) => {
-    setComments(prev => ({
-      ...prev,
-      [videoId]: prev[videoId].map(comment => 
-        comment.id === commentId 
-          ? { ...comment, likes: comment.likes + 1 }
-          : comment
-      )
-    }));
+  const handleLikeMessage = (msgId) => {
+    setLiveMessages(prev => prev.map(msg => 
+      msg.id === msgId 
+        ? { ...msg, likes: msg.likes + 1 }
+        : msg
+    ));
   };
 
-  const currentVideoData = videos[currentVideo];
+  const handleLikeVideo = () => {
+    setIsLiked(!isLiked);
+  };
 
   return (
     <div className="live-page">
-      <div className="live-main-container">
-        {/* Section Vidéos à gauche */}
+      <div className="live-container">
+        {/* Section Vidéos */}
         <div className="videos-section">
-          <div 
-            className="live-container" 
-            ref={containerRef}
-            onScroll={handleScroll}
-          >
-            {videos.map((video, index) => (
+          <div className="section-header">
+            <Flame className="header-icon" />
+            <h2>Live IA - Tutoriels</h2>
+            <div className="live-badge">
+              <div className="live-dot"></div>
+              <span>{viewerCount} spectateurs</span>
+            </div>
+          </div>
+
+          {videos.length > 0 ? (
+            <div className="video-player-container">
+              <div className="video-wrapper">
+                <iframe
+                  title={videos[currentVideo]?.title}
+                  src={videos[currentVideo]?.url}
+                  allow="autoplay; encrypted-media; picture-in-picture"
+                  frameBorder="0"
+                  allowFullScreen
+                />
+              </div>
+              
+              <div className="video-info">
+                <h3 className="video-title">{videos[currentVideo]?.title}</h3>
+                <p className="video-channel">{videos[currentVideo]?.channel}</p>
+                
+                <div className="video-stats">
+                  <div className="stat">
+                    <Eye size={16} />
+                    <span>{videos[currentVideo]?.views?.toLocaleString()} vues</span>
+                  </div>
+                </div>
+                
+                <div className="video-actions">
+                  <button 
+                    className={`action-btn ${isLiked ? 'liked' : ''}`}
+                    onClick={handleLikeVideo}
+                  >
+                    <Heart size={20} fill={isLiked ? 'currentColor' : 'none'} />
+                    <span>{isLiked ? 'Aimé' : 'Like'}</span>
+                  </button>
+                  
+                  <button className="action-btn">
+                    <MessageCircle size={20} />
+                    <span>Commenter</span>
+                  </button>
+                  
+                  <button className="action-btn">
+                    <Share size={20} />
+                    <span>Partager</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="loading-videos">Chargement des vidéos...</div>
+          )}
+          
+          {/* Miniatures des autres vidéos */}
+          <div className="video-thumbnails">
+            {videos.slice(1, 4).map((video, index) => (
               <div 
                 key={video.id} 
-                className={`video-item ${index === currentVideo ? 'active' : ''}`}
+                className="thumbnail"
+                onClick={() => setCurrentVideo(index + 1)}
               >
-                <div className="video-wrapper">
-                  <iframe
-                    title={video.title}
-                    src={index === currentVideo ? video.url : ''}
-                    allow="autoplay; encrypted-media"
-                    frameBorder="0"
-                    allowFullScreen
-                  />
-                  <div className="video-overlay">
-                    <div className="user-info">
-                      <div className="avatar">
-                        <User size={20} />
-                      </div>
-                      <div className="username">Creator_{index + 1}</div>
-                      <button className="follow-btn">Suivre</button>
-                    </div>
-                    <div className="video-actions">
-                      <button className="action-button">
-                        <Heart className="icon" />
-                        <span>{video.likes.toLocaleString()}</span>
-                      </button>
-                      <button className="action-button">
-                        <MessageCircle className="icon" />
-                        <span>{video.comments}</span>
-                      </button>
-                      <button className="action-button">
-                        <Share className="icon" />
-                        <span>{video.shares}</span>
-                      </button>
-                      <button className="action-button">
-                        <MoreHorizontal className="icon" />
-                      </button>
-                    </div>
-                  </div>
+                <img src={video.thumbnail} alt={video.title} />
+                <div className="thumbnail-info">
+                  <p className="thumbnail-title">{video.title.substring(0, 50)}...</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Section Discussion à droite */}
-        <div className="discussion-section">
-          <div className="discussion-header">
-            <h3>Discussion en direct</h3>
-            <div className="live-indicator">
-              <div className="live-dot"></div>
-              <span>En direct</span>
+        {/* Section Chat */}
+        <div className="chat-section">
+          <div className="chat-header">
+            <Zap className="chat-icon" />
+            <h3>Chat Live</h3>
+            <div className="online-count">
+              <div className="online-dot"></div>
+              <span>En ligne</span>
             </div>
           </div>
 
-          {/* Utilisateurs actifs */}
-          <div className="active-users">
-            <h4>Utilisateurs actifs</h4>
-            <div className="users-list">
-              {activeUsers.map(user => (
-                <div key={user.id} className="user-item">
-                  <div className="user-avatar">
-                    <User size={16} />
-                    {user.isLive && <div className="live-badge"></div>}
-                  </div>
-                  <span className="user-name">{user.name}</span>
+          <div className="messages-container">
+            {liveMessages.map(message => (
+              <div key={message.id} className="message">
+                <div className="message-avatar">
+                  <User size={16} />
                 </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Commentaires */}
-          <div className="comments-container">
-            <div className="comments-list">
-              {currentVideoData && comments[currentVideoData.id]?.map(comment => (
-                <div key={comment.id} className="comment-item">
-                  <div className="comment-avatar">
-                    <User size={16} />
+                <div className="message-content">
+                  <div className="message-header">
+                    <span className="message-user">{message.user}</span>
+                    <span className="message-time">
+                      <Clock size={12} />
+                      {message.time}
+                    </span>
                   </div>
-                  <div className="comment-content">
-                    <div className="comment-header">
-                      <span className="comment-user">{comment.user}</span>
-                      <span className="comment-time">{comment.time}</span>
-                    </div>
-                    <p className="comment-text">{comment.text}</p>
-                    <div className="comment-actions">
-                      <button 
-                        className="like-btn"
-                        onClick={() => handleLikeComment(currentVideoData.id, comment.id)}
-                      >
-                        <Heart size={14} />
-                        <span>{comment.likes}</span>
-                      </button>
-                      <button className="reply-btn">Répondre</button>
-                    </div>
+                  <p className="message-text">{message.text}</p>
+                  <div className="message-actions">
+                    <button 
+                      className="message-action"
+                      onClick={() => handleLikeMessage(message.id)}
+                    >
+                      <ThumbsUp size={14} />
+                      {message.likes > 0 && <span>{message.likes}</span>}
+                    </button>
+                    <button className="message-action">
+                      <Reply size={14} />
+                    </button>
                   </div>
                 </div>
-              ))}
-              <div ref={commentsEndRef} />
-            </div>
-
-            {/* Input pour nouveau commentaire */}
-            {currentVideoData && (
-              <div className="comment-input-container">
-                <input
-                  type="text"
-                  placeholder="Ajouter un commentaire..."
-                  value={newComment}
-                  onChange={(e) => setNewComment(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && handleAddComment(currentVideoData.id)}
-                  className="comment-input"
-                />
-                <button 
-                  onClick={() => handleAddComment(currentVideoData.id)}
-                  className="send-button"
-                  disabled={!newComment.trim()}
-                >
-                  <Send size={18} />
-                </button>
               </div>
-            )}
+            ))}
+            <div ref={messagesEndRef} />
+          </div>
+
+          {/* Input message */}
+          <div className="message-input-area">
+            <div className="input-wrapper">
+              <input
+                type="text"
+                placeholder="Écrivez votre message..."
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && handleAddMessage()}
+              />
+              <button 
+                onClick={handleAddMessage}
+                className="send-btn"
+                disabled={!newComment.trim()}
+              >
+                <Send size={20} />
+              </button>
+            </div>
           </div>
         </div>
       </div>

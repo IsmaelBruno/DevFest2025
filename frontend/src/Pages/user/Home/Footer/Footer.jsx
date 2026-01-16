@@ -10,15 +10,21 @@ import {
   FaArrowRight
 } from "react-icons/fa";
 import Marquee from "react-fast-marquee";
-import img1 from "../../../../assets/Images/Jpeg/EMIT.png";
-import img2 from "../../../../assets/Images/Jpeg/Akata.jpg";
-import img3 from "../../../../assets/Images/Jpeg/Computer.jpg";
-import img4 from "../../../../assets/Images/Jpeg/emitech.jpg";
-import img5 from "../../../../assets/Images/Jpeg/FiharySoft.jpg";
-import img6 from "../../../../assets/Images/Jpeg/relia.jpg";
+import img1 from "../../../../assets/Images/Sponsors/1.jpg";
+import img2 from "../../../../assets/Images/Sponsors/2.jpg";
+import img3 from "../../../../assets/Images/Sponsors/3.jpg";
+import img4 from "../../../../assets/Images/Sponsors/4.jpg";
+import img5 from "../../../../assets/Images/Sponsors/5.jpg";
+import img6 from "../../../../assets/Images/Sponsors/6.jpg";
+import img7 from "../../../../assets/Images/Sponsors/7.jpg";
+import img8 from "../../../../assets/Images/Sponsors/8.jpg";
+import img9 from "../../../../assets/Images/Sponsors/9.jpg";
+import img10 from "../../../../assets/Images/Sponsors/10.jpg";
+import img11 from "../../../../assets/Images/Sponsors/11.jpg";
+import img12 from "../../../../assets/Images/Sponsors/12.jpg";
 
 const Footer = () => {
-  const partnerImages = [img1, img2, img3, img4, img5, img6];
+  const partnerImages = [img1, img2, img3, img4, img5, ,img6,img7,img8,img9,img10,img11,img12];
 
   const currentYear = new Date().getFullYear();
 
@@ -59,7 +65,7 @@ const Footer = () => {
           {/* Section Partenaires */}
           <div className="partners-section">
             <div className="partners-wrapper container">
-              <h3 className="partners-title">Nos Partenaires de Confiance</h3>
+              <h3 className="partners-title">Nos Partenaires durant cet évenement</h3>
               <div className="partners-marquee">
                 <Marquee pauseOnHover={true} speed={40} gradient={false}>
                   {partnerImages.map((img, index) => (
@@ -80,7 +86,7 @@ const Footer = () => {
             <div className="footer-column">
               <div className="footer-logo">
                 <h2 className="logo-text">
-                  <span className="logo-gradient">Edden</span>
+                  <span className="logo-gradient">MadaScan</span>
                 </h2>
                 <p className="logo-tagline">Innovation & Excellence</p>
               </div>
@@ -104,20 +110,64 @@ const Footer = () => {
               </div>
             </div>
 
-            {/* Colonne 2 - Liens rapides */}
-            <div className="footer-column">
-              <h3 className="column-title">Liens Rapides</h3>
-              <ul className="footer-links">
-                {quickLinks.map((link, index) => (
-                  <li key={index}>
-                    <a href={link.url}>
-                      <FaArrowRight className="link-icon" />
-                      <span>{link.name}</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {/* Colonne 2 - Liens rapides (MadaScan) */}
+<div className="footer-column">
+  <h3 className="column-title">Liens Rapides</h3>
+
+  <ul className="footer-links">
+
+    <li>
+      <a href="/madascan-app/">
+        <FaArrowRight className="link-icon" />
+        <span>Accueil</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="/madascan-app/scanner">
+        <FaArrowRight className="link-icon" />
+        <span>Scanner</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="/madascan-app/analyse">
+        <FaArrowRight className="link-icon" />
+        <span>Analyse IA</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="/madascan-app/historique">
+        <FaArrowRight className="link-icon" />
+        <span>Historique</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="/madascan-app/help">
+        <FaArrowRight className="link-icon" />
+        <span>Aide</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="/madascan-app/communaute">
+        <FaArrowRight className="link-icon" />
+        <span>Communauté</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="/madascan-app/premium">
+        <FaArrowRight className="link-icon" />
+        <span>Premium</span>
+      </a>
+    </li>
+
+  </ul>
+</div>
+
 
             {/* Colonne 3 - Contact */}
             <div className="footer-column">
@@ -133,7 +183,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <FaEnvelope className="contact-icon" />
-                  <span>contact@edden.mg</span>
+                  <span>contact@madascan.mg</span>
                 </li>
               </ul>
             </div>
@@ -153,7 +203,7 @@ const Footer = () => {
         <div className="footer-bottom">
           <div className="footer-bottom-content container">
             <p className="copyright">
-              © {currentYear} <strong>Edden</strong>. Tous droits réservés.
+              © {currentYear} <strong>MadaScan</strong>. Tous droits réservés.
             </p>
             <div className="footer-bottom-links">
               <a href="/confidentialite">Confidentialité</a>

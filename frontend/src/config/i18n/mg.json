@@ -1,0 +1,20 @@
+{
+  "navbar": {
+    "home": "Fandraisana",
+    "analyse": "Fandalinana",
+    "scam": "Fampitahorana",
+    "help": "Fanampiana",
+    "community": "Fiaraha-monina",
+    "premium": "Premium",
+    "toggleMenu": "Sakafo"
+  },
+  
+  "speedDial": {
+    "account": "Kaonty",
+    "language": "Fiteny",
+    "mute": "Ajanona ny feo",
+    "unmute": "Alefaso ny feo",
+    "theme": "Loko",
+    "menu": "Sakafo haingana"
+  }
+}

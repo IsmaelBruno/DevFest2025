@@ -1,0 +1,385 @@
+@use '../../styles/abstracts/spacing.scss';
+@use '../../styles/abstracts/borderRadius.scss';
+@use '../../styles/abstracts/mixin.scss';
+
+.bubble-message {
+    position: absolute;
+    top: 60px;
+    right: 35px;
+    width: 280px;
+    background: var(--whiteColor);
+    font-family: 'Orbitron';
+    color : var(--primaryColor);
+    border-radius: 24px;
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(4, 113, 133, 0.08),
+        0 4px 12px rgba(4, 113, 133, 0.05);
+    padding: 20px;
+    z-index: 100;
+    font-family: "Orbitron";
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 
+            0 30px 80px rgba(0, 0, 0, 0.2),
+            0 0 0 1px rgba(4, 113, 133, 0.12),
+            0 8px 24px rgba(4, 113, 133, 0.1);
+    }
+    
+    &::before {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        right: 60px;
+        width: 20px;
+        height: 20px;
+        background: var(--whiteColor);
+        transform: rotate(45deg);
+        box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.05);
+        border-left: 1px solid rgba(4, 113, 133, 0.08);
+        border-top: 1px solid rgba(4, 113, 133, 0.08);
+    }
+}
+
+.bubble-arrow {
+    position: absolute;
+    bottom: -10px;
+    right: 60px;
+    width: 20px;
+    height: 20px;
+    background: var(--whiteColor);
+    transform: rotate(45deg);
+    border-left: 1px solid rgba(4, 113, 133, 0.08);
+    border-top: 1px solid rgba(4, 113, 133, 0.08);
+    z-index: 1;
+}
+
+.bubble-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+    position: relative;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(4, 113, 133, 0.08);
+}
+
+.bubble-avatar {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--primaryColor), var(--secondaryColor));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--whiteColor);
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(4, 113, 133, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    
+    &::after {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--primaryColor), var(--secondaryColor));
+        z-index: -1;
+        opacity: 0.5;
+        filter: blur(4px);
+    }
+}
+
+.bubble-info {
+    flex: 1;
+    min-width: 0;
+    
+    .bubble-name {
+        display: block;
+        font-weight: 700;
+        font-size: 15px;
+        color: #1a1a1a;
+        line-height: 1.2;
+        letter-spacing: 0.3px;
+    }
+    
+    .bubble-status {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 11px;
+        color: var(--primaryColor);
+        opacity: 0.9;
+        font-weight: 500;
+        margin-top: 2px;
+        
+        &::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--successColor);
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+    }
+}
+
+.close-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(135deg, #f5f5f5, #e8e8e8);
+    color: #666;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    
+    &:hover {
+        background: linear-gradient(135deg, #e8e8e8, #dbdbdb);
+        color: #333;
+        transform: rotate(90deg) scale(1.1);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    }
+}
+
+.bubble-body {
+    min-height: 70px;
+    margin-bottom: 8px;
+}
+
+.message-content {
+    font-family: "Poppins", -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #f8f9fa, #f1f5f9);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 12px;
+    border: 1px solid rgba(4, 113, 133, 0.1);
+    position: relative;
+    min-height: 52px;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.02);
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        border-radius: 18px;
+        background: linear-gradient(135deg, var(--primaryColor), var(--secondaryColor));
+        z-index: -1;
+        opacity: 0.1;
+    }
+}
+
+.message-text {
+    font-size: 14px;
+    font-family: "Orbitron";
+    line-height: 1.5;
+    color: var(--primaryColor);
+    display: inline;
+    font-weight: 500;
+}
+
+.typing-cursor {
+    display: inline-block;
+    color: var(--primaryColor);
+    font-weight: 900;
+    animation: blink 0.8s infinite;
+    margin-left: 1px;
+    transform: translateY(1px);
+}
+
+.typing-indicator {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    align-items: center;
+    height: 24px;
+    margin-top: 8px;
+    
+    .typing-dot {
+        width: 8px;
+        height: 8px;
+        background: var(--primaryColor);
+        border-radius: 50%;
+        opacity: 0.6;
+        animation: typing-bounce 1.6s infinite ease-in-out;
+        
+        &:nth-child(1) { 
+            animation-delay: -0.32s; 
+            background: var(--primaryColor);
+        }
+        &:nth-child(2) { 
+            animation-delay: -0.16s; 
+            background: var(--secondaryColor);
+        }
+        &:nth-child(3) { 
+            animation-delay: 0s; 
+            background: var(--accentColor);
+        }
+    }
+}
+
+.bubble-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(4, 113, 133, 0.08);
+}
+
+.timestamp {
+    font-size: 11px;
+    color: #888;
+    opacity: 0.9;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+}
+
+.message-progress {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--primaryColor);
+    opacity: 0.8;
+    
+    .progress-dots {
+        display: flex;
+        gap: 2px;
+        
+        span {
+            width: 4px;
+            height: 4px;
+            background: currentColor;
+            border-radius: 50%;
+            opacity: 0.4;
+            
+            &:nth-child(1) { animation: dotPulse 1.5s infinite; }
+            &:nth-child(2) { animation: dotPulse 1.5s infinite 0.2s; }
+            &:nth-child(3) { animation: dotPulse 1.5s infinite 0.4s; }
+        }
+    }
+}
+
+// Animations
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+@keyframes typing-bounce {
+    0%, 60%, 100% { 
+        transform: translateY(0);
+        opacity: 0.4;
+    }
+    30% { 
+        transform: translateY(-8px);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% { 
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% { 
+        opacity: 0.7;
+        transform: scale(0.9);
+    }
+}
+
+@keyframes dotPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+// Dark mode
+.darktheme {
+    .bubble-message {
+        background: rgba(30, 30, 40, 0.95);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: 
+            0 20px 60px rgba(0, 0, 0, 0.4),
+            0 0 0 1px rgba(37, 210, 241, 0.1);
+        
+        &::before,
+        .bubble-arrow {
+            background: rgba(30, 30, 40, 0.95);
+            border-color: rgba(255, 255, 255, 0.05);
+        }
+    }
+    
+    .bubble-info .bubble-name {
+        color: white;
+    }
+    
+    .close-btn {
+        background: rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.7);
+        
+        &:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+        }
+    }
+    
+    .message-content {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .message-text {
+        color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .timestamp {
+        color: rgba(255, 255, 255, 0.6);
+    }
+    
+    .message-progress {
+        color: var(--secondaryColor);
+    }
+}
+
+// Responsive
+@media (max-width: 768px) {
+    .bubble-message {
+        position: relative;
+        top: 0;
+        right: 0;
+        margin: 20px auto;
+        width: 90%;
+        max-width: 280px;
+        
+        &::before,
+        .bubble-arrow {
+            display: none;
+        }
+    }
+}
+
+@media (min-width: 1024px) {
+    .bubble-message {
+        top: 60px;
+        right: 40px;
+    }
+}

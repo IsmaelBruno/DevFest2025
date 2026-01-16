@@ -1,0 +1,20 @@
+{
+  "navbar": {
+    "home": "Accueil",
+    "analyse": "Analyse",
+    "scam": "Arnaque",
+    "help": "Aide",
+    "community": "Communauté",
+    "premium": "Premium",
+    "toggleMenu": "Menu"
+  },
+  
+  "speedDial": {
+    "account": "Compte",
+    "language": "Langue",
+    "mute": "Couper le son",
+    "unmute": "Activer le son",
+    "theme": "Thème",
+    "menu": "Menu rapide"
+  }
+}

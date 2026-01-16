@@ -1,94 +1,337 @@
-@use "../../../styles/abstracts/mixin.scss" as mix;
-@use "../../../styles/abstracts/spacing.scss" as spacing;
-@use "../../../styles/abstracts/borderRadius.scss" as radius;
-
-.header {
+// Components/admin/NavBar/NavBar.scss
+.navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: spacing.$spacing-lg spacing.$spacing-xxl;
-  background: var(--whiteColor);
-  border-bottom: 1px solid var(--greyColor);
+  padding: 1rem 2rem;
+  background-color: var(--whiteColor);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 
   &__left {
-    display: flex;
-    align-items: center;
-  }
-
-  &__logo {
-    display: flex;
-    align-items: center;
-    gap: spacing.$spacing-sm;
-  }
-
-  &__logo-icon {
-    font-size: 24px;
-    color: var(--darkFontColor);
-  }
-
-  &__title {
-    font-size: 24px;
-    font-weight: 600;
-    margin: 0;
-    color: var(--darkFontColor);
+    flex: 1;
+    
+    .navbar__search {
+      max-width: 400px;
+      
+      input {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 1px solid var(--greyColor);
+        border-radius: 6px;
+        font-size: 0.95rem;
+        
+        &:focus {
+          outline: none;
+          border-color: var(--primaryColor);
+        }
+      }
+    }
   }
 
   &__right {
     display: flex;
     align-items: center;
-    gap: spacing.$spacing-lg;
+    gap: 1rem;
   }
 
-  &__balance {
-    background: var(--primaryColor);
-    color: var(--whiteColor);
-    padding: spacing.$spacing-sm spacing.$spacing-lg;
-    border-radius: radius.$border-radius-sm;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  &__balance-label {
-    font-size: 14px;
-    opacity: 0.8;
-  }
-
-  &__balance-amount {
-    font-weight: 600;
-    font-size: 16px;
+  &__notification {
+    position: relative;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    color: var(--darkFontColor);
+    
+    .notification-badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background-color: var(--accentColor);
+      color: var(--primaryColor);
+      font-size: 0.7rem;
+      padding: 0.15rem 0.4rem;
+      border-radius: 50%;
+      min-width: 18px;
+      text-align: center;
+    }
   }
 
   &__profile {
+    position: relative;
+    
+    .profile-button {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 6px;
+      transition: background-color 0.2s;
+      
+      &:hover {
+        background-color: var(--greyColor);
+      }
+      
+      .profile-avatar {
+        width: 36px;
+        height: 36px;
+        background: linear-gradient(135deg, var(--primaryColor) 0%, var(--accentColor) 100%);
+        color: var(--primaryColor);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+      
+      .profile-name {
+        font-weight: 500;
+        color: var(--primaryColor);
+        font-size: 0.95rem;
+      }
+    }
+    
+    .profile-menu {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: 280px;
+      background: var(--whiteColor);
+      border-radius: 8px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+      z-index: 1000;
+      margin-top: 0.5rem;
+      
+      &__header {
+        padding: 1.25rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        border-bottom: 1px solid var(--greyColor);
+        
+        .profile-menu__avatar {
+          width: 48px;
+          height: 48px;
+          background: linear-gradient(135deg, var(--primaryColor) 0%, var(--accentColor) 100%);
+          color: white;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 600;
+          font-size: 1.1rem;
+        }
+        
+        .profile-menu__info {
+          flex: 1;
+          
+          .profile-menu__name {
+            font-weight: 600;
+            color: var(--darkFontColor);
+            margin-bottom: 0.25rem;
+          }
+          
+          .profile-menu__email {
+            font-size: 0.85rem;
+            color: var(--disabledColor);
+          }
+        }
+      }
+      
+      &__divider {
+        height: 1px;
+        background: var(--greyColor);
+        margin: 0.5rem 0;
+      }
+      
+      &__item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        width: 100%;
+        padding: 0.75rem 1.25rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: var(--darkFontColor);
+        font-size: 0.95rem;
+        transition: background-color 0.2s;
+        
+        &:hover {
+          background-color: var(--greyColor);
+        }
+        
+        &.logout {
+          color: var(--accentColor);
+          
+          &:hover {
+            background-color: rgba(var(--accentColor), 0.1);
+          }
+        }
+      }
+    }
+  }
+}
+
+// Modal A propos du compte
+.account-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  backdrop-filter: blur(4px);
+}
+
+.account-modal {
+  background: var(--whiteColor);
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  
+  &__header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    font-size: 18px;
-    gap: 15px;
-    background: none;
-    padding: spacing.$spacing-xs 15px;
-    border-radius: radius.$border-radius-sm;
-    color: var(--primaryColor);
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--greyColor);
+    
+    h3 {
+      margin: 0;
+      color: var(--darkFontColor);
+      font-size: 1.25rem;
+    }
+    
+    .close-button {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--disabledColor);
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      
+      &:hover {
+        background-color: var(--greyColor);
+        color: var(--darkFontColor);
+      }
+    }
   }
-
-  &__notification,
-  &__avatar {
-    font-size: 24px;
-  }
-
-  &__menu {
-    @include mix.button-base;
-    background: none;
-    font-size: 16px;
-    color: var(--darkFontColor);
-  }
-
-  @include mix.mobile {
-    flex-direction: column;
-    gap: 15px;
-    align-items: stretch;
-
-    &__right {
-      justify-content: space-between;
+  
+  &__content {
+    padding: 1.5rem;
+    
+    .account-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      
+      .account-avatar-large {
+        width: 100px;
+        height: 100px;
+        background: linear-gradient(135deg, var(--primaryColor) 0%, var(--accentColor) 100%);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        font-weight: 600;
+      }
+      
+      .account-details {
+        width: 100%;
+        
+        .account-detail {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0.75rem 0;
+          border-bottom: 1px solid var(--greyColor);
+          
+          &:last-child {
+            border-bottom: none;
+          }
+          
+          .detail-label {
+            color: var(--disabledColor);
+            font-size: 0.9rem;
+          }
+          
+          .detail-value {
+            color: var(--darkFontColor);
+            font-weight: 500;
+            
+            &.role-badge {
+              background: rgba(var(--primaryColor), 0.1);
+              color: var(--primaryColor);
+              padding: 0.25rem 0.75rem;
+              border-radius: 20px;
+              font-size: 0.85rem;
+              font-weight: 600;
+            }
+          }
+        }
+      }
+    }
+    
+    .account-actions {
+      display: flex;
+      gap: 1rem;
+      
+      .account-action-btn {
+        flex: 1;
+        padding: 0.75rem 1rem;
+        border-radius: 6px;
+        font-weight: 500;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        font-size: 0.95rem;
+        transition: all 0.2s;
+        
+        &.primary {
+          background: var(--primaryColor);
+          color: white;
+          border: none;
+          
+          &:hover {
+            background: var(--primaryColor);
+          }
+        }
+        
+        &.secondary {
+          background: none;
+          color: var(--primaryColor);
+          border: 1px solid var(--primaryColor);
+          
+          &:hover {
+            background: rgba(var(--primaryColor), 0.1);
+          }
+        }
+      }
     }
   }
 }

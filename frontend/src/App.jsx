@@ -8,7 +8,6 @@ import FloatingCursor from "./Components/FloatingCursor/FloatingCursor";
 import './App.scss'
 
 function App() {
-
   return (
     <>
       <FloatingCursor />
@@ -23,9 +22,9 @@ function App() {
           <Router>
             <ScrollToTop />
             <RoutesApplication />
+            <SpeedDial /> {/* ✅ Maintenant dans le Router */}
           </Router>
         </AudioProvider>
-        <SpeedDial />
       </ClickSpark>
     </>
   )

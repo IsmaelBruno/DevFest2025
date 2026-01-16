@@ -1,0 +1,287 @@
+// Help.scss
+@use '../../../styles/abstracts/spacing.scss';
+@use '../../../styles/abstracts/borderRadius.scss';
+@use '../../../styles/abstracts/mixin.scss';
+
+.help-page {
+  background: var(--whiteColor);
+  color: var(--thirdColor);
+  font-family: 'Poppins', sans-serif;
+
+  .help-hero {
+    padding: spacing.$spacing-xxl 0;
+    text-align: center;
+    min-height: 70vh;
+    min-width: 50vw;
+    background: url('../../../assets/svg/dots-lg.svg');
+    background-position: center;
+    background-size: contain;
+    color: var(--primaryColor);
+
+    .help-hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 spacing.$spacing-lg;
+    }
+
+    .help-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: spacing.$spacing-md;
+      line-height: 1.2;
+
+      @media (max-width: 768px) {
+        font-size: 2rem;
+      }
+    }
+
+    .help-subtitle {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: spacing.$spacing-xl;
+      opacity: 0.9;
+
+      @media (max-width: 768px) {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: spacing.$spacing-md;
+    padding: spacing.$spacing-md spacing.$spacing-xl;
+    background: white;
+    color: #047185;
+    border: none;
+    font-family: "Poppins";
+    border-radius: borderRadius.$border-radius-lg;
+    border: 2.5px solid var(--primaryColor);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    .btn-icon {
+      font-size: 1.2rem;
+    }
+
+    .btn-arrow {
+      font-size: 1rem;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover .btn-arrow {
+      transform: translateX(3px);
+    }
+  }
+
+  .help-content {
+    padding: spacing.$spacing-xxl 0;
+    background: white;
+
+    .content-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 spacing.$spacing-lg;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #047185;
+      text-align: center;
+      margin-bottom: spacing.$spacing-xl;
+
+      @media (max-width: 768px) {
+        font-size: 1.5rem;
+      }
+    }
+
+    .gallery-container {
+      height: 500px;
+      margin: spacing.$spacing-xl auto;
+      max-width: 1000px;
+      background: #f0f7f9;
+      border-radius: borderRadius.$border-radius-lg;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+      @media (max-width: 768px) {
+        height: 400px;
+      }
+
+      @media (max-width: 480px) {
+        height: 300px;
+      }
+    }
+
+    .resources-section {
+      margin-top: spacing.$spacing-xxl;
+      padding: spacing.$spacing-xl 0;
+      background: #f0f7f9;
+      border-radius: borderRadius.$border-radius-lg;
+    }
+
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: spacing.$spacing-lg;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 spacing.$spacing-lg;
+
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        gap: spacing.$spacing-md;
+      }
+    }
+
+    .resource-card {
+      background: white;
+      border-radius: borderRadius.$border-radius-lg;
+      padding: spacing.$spacing-lg;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 1px solid #e3e8eb;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        border-color: #047185;
+      }
+
+      .resource-icon-container {
+        width: 60px;
+        height: 60px;
+        background: #f0f7f9;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto spacing.$spacing-md;
+        
+        .resource-icon {
+          font-size: 1.5rem;
+          color: #047185;
+        }
+      }
+
+      h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: spacing.$spacing-md;
+        color: #1F2D36;
+      }
+
+      p {
+        color: #334E57;
+        line-height: 1.6;
+        font-size: 0.95rem;
+        margin-bottom: spacing.$spacing-lg;
+      }
+
+      .resource-link {
+        display: inline-flex;
+        align-items: center;
+        gap: spacing.$spacing-xs;
+        color: #047185;
+        font-weight: 500;
+        text-decoration: none;
+        font-size: 0.9rem;
+
+        &:hover {
+          text-decoration: underline;
+        }
+
+        svg {
+          transition: transform 0.3s ease;
+        }
+
+        &:hover svg {
+          transform: translateX(3px);
+        }
+      }
+    }
+  }
+
+  .help-footer {
+    padding: spacing.$spacing-xl 0;
+    text-align: center;
+    background: #f8fcfd;
+    border-top: 1px solid #e3e8eb;
+
+    .footer-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 spacing.$spacing-lg;
+    }
+
+    .footer-text {
+      color: #334E57;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: spacing.$spacing-md;
+    }
+
+    .footer-cta {
+      color: #047185;
+      font-weight: 600;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// Responsive design
+@include mixin.mobile {
+  .help-page {
+    .help-hero {
+      padding: spacing.$spacing-xl 0;
+
+      .help-title {
+        font-size: 1.75rem;
+      }
+
+      .help-subtitle {
+        font-size: 0.95rem;
+      }
+    }
+
+    .help-content {
+      padding: spacing.$spacing-xl 0;
+
+      .section-title {
+        font-size: 1.25rem;
+      }
+
+      .gallery-container {
+        height: 300px;
+        margin: spacing.$spacing-lg auto;
+      }
+
+      .resource-card {
+        padding: spacing.$spacing-md;
+      }
+    }
+
+    .help-footer {
+      padding: spacing.$spacing-lg 0;
+    }
+  }
+}
